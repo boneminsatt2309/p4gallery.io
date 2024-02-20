@@ -1,0 +1,144 @@
+body {
+  background-image: url(./asset/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: sans-serif;
+  margin: 0; /* Reset default margin */
+  padding: 0; /* Reset default padding */
+}
+
+.container {
+  display: flex;
+  flex-direction: column; /* Change to column layout on small screens */
+  align-items: center; /* Center align items */
+  padding-top: 10px;
+}
+
+.left-box,
+.right-box {
+  width: 100%; /* Full width on small screens */
+  max-width: 90%; /* Limit width on larger screens */
+}
+
+.right-box {
+  display: flex;
+  flex-direction: row; /* Change to column layout */
+  gap: 20px; /* Reduce gap for smaller screens */
+  align-items: center; /* Center align items */
+}
+
+.left-box {
+  display: flex;
+  flex-direction: row; /* Change to column layout */
+  align-items: center; /* Center align items */
+  margin-bottom: 20px; /* Add margin for spacing */
+}
+
+.right-box > li {
+  list-style: none;
+}
+
+.hov {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  position: relative;
+  letter-spacing: 4px;
+}
+
+.hov:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #ffffff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.hov:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.body {
+  position: relative;
+  text-align: center; /* Center align text */
+  padding: 20px; /* Add padding for spacing */
+}
+
+.call {
+  width: 130px;
+  height: 38px;
+  border: 1px solid white;
+  background-color: #a8f2fe;
+  border-radius: 10px;
+  font-family: sans-serif;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.call:hover {
+  background-color: aqua;
+  box-shadow: 10px 0px 10px 0px;
+}
+@media screen and (min-width: 700px) {
+  .container {
+    flex-direction: row; /* Change to row layout on larger screens */
+    justify-content: space-between; /* Distribute items evenly */
+  }
+  .right-box {
+    flex-direction: row; 
+    gap: 60px; 
+  }
+  .left-box>img{
+    width: 20px;
+  }
+  .body {
+    text-align: left; /* Restore text alignment */
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    flex-direction: row; /* Change to row layout on small screens */
+    justify-content: space-between; /* Distribute items evenly */
+    align-items: center; /* Center align items */
+    padding: 0px; /* Adjust padding for spacing */
+  }
+  .left-box,
+  .right-box {
+    width: 100%; /* Half width on small screens */
+    max-width: none; /* Remove max-width */
+  }
+  .right-box {
+    flex-direction: row; /* Change to row layout */
+    gap: 12px; /* Reduce gap for smaller screens */
+    align-items: center; /* Center align items */
+  }
+  .left-box {
+    flex-direction: row; /* Change to row layout */
+    align-items: center; /* Center align items */
+    margin-bottom: 10px; /* Adjust margin for spacing */
+  }
+  .hov {
+    font-size: 12px; /* Reduce font size for smaller screens */
+  }
+  .body {
+    padding: 20px; /* Add padding for spacing */
+  }
+  h1{
+    text-align: left;
+  }
+  p{
+    font-size: 20px;
+    text-align: left;
+  }
+  .call-container {
+    text-align: left; /* Align button to the left */
+    margin-top: 10px; /* Add margin to separate from other elements */
+  }
+}

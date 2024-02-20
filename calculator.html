@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body,
+html {
+    height: 100%;
+    background-color: #26547c;
+    font-family: 'Roboto Condensed';
+    font-size: 24px;
+    overflow: hidden;
+}
+
+button {
+    border: 0;
+    color: #fcfcfc;
+    outline: 0;
+    transition: transform .1s ease;
+}
+
+button:active {
+    transform: translateY(5px);
+}
+
+.tag a {
+    bottom: 1px;
+    color: #fcfcfc;
+    font-size: 18px;
+    position: absolute;
+    right: 5px;
+    text-decoration: none;
+}
+
+.tag a:visited {
+    color: #fcfcfc;
+    text-decoration: none;
+}
+
+.center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    background-color: #ef476f;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px rgba(239, 71, 111, 0.3);
+    height: 355px;
+    min-width: 290px; /* Adjusted for smaller screens */
+    width: 90%; /* Adjusted for smaller screens */
+    max-width: 400px; /* Adjusted for larger screens */
+    margin: auto; /* Center the calculator */
+    padding: 10px; /* Add padding */
+}
+
+.top-bar {
+    display: flex;
+    width: 100%;
+}
+
+.top-bar button {
+    background: #ffd166;
+    border-radius: 10px;
+    color: black;
+    flex: 0.9;
+    font-size: 22px;
+    height: 48px;
+    line-height: 48px;
+    margin: 10px;
+    box-shadow: 0 4px 1px rgba(28, 61, 91, 0.15);
+}
+
+.top-bar div {
+    background: #26547c;
+    border-radius: 10px;
+    box-shadow: inset 0 4px 5px rgba(239, 71, 111, 0.3);
+    color: #fcfcfc;
+    flex: 4;
+    font-size: 28px;
+    height: 26px;
+    margin: 10px;
+    padding: 12px;
+    text-align: right;
+}
+
+.keys {
+    display: flex;
+    flex-wrap: wrap; /* Allow keys to wrap to the next line */
+    justify-content: space-around; /* Distribute keys evenly */
+    margin-top: 10px; /* Adjust as needed */
+    height: auto; /* Allow height to adjust based on content */
+    padding: 10px; /* Add padding */
+}
+
+.keys button {
+    background: #26547c;
+    border-radius: 10px;
+    height: 50px;
+    line-height: 48px;
+    margin: 5px; /* Adjust margin for spacing between keys */
+    width: 75px;
+    box-shadow: 0 4px 1px rgba(28, 61, 91, 0.15);
+}
+
+.keys button.op {
+    background: #ffd166;
+    color: black;
+    line-height: 45px; /* Adjusted for smaller screens */
+    box-shadow: 0 4px 1px rgba(28, 61, 91, 0.15);
+}
+
+.keys button.equals {
+    background: #06d6a0;
+    color: black;
+    box-shadow: 0 4px 1px rgba(28, 61, 91, 0.15);
+}
+
+@media screen and (max-width: 600px) {
+    .calculator {
+        min-width: 220px; /* Adjusted for smaller screens */
+        width: 90%; /* Adjusted for smaller screens */
+    }
+
+    .keys button {
+        width: 60px; /* Adjusted for smaller screens */
+        height: 40px; /* Adjusted for smaller screens */
+        line-height: 38px; /* Adjusted for smaller screens */
+        font-size: 16px; /* Adjusted for smaller screens */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="center">
+        <div class="calculator">
+            <div class="top-bar">
+                <button class="op clear">C</button>
+                <div class="display">0</div>
+            </div>
+            <div class="keys">
+                <div class="row">
+                    <button class="num">7</button>
+                    <button class="num">8</button>
+                    <button class="num">9</button>
+                    <button class="op multiply">x</button>
+                </div>
+                <div class="row">
+                    <button class="num">4</button>
+                    <button class="num">5</button>
+                    <button class="num">6</button>
+                    <button class="op divide">/</button>
+                </div>
+                <div class="row">
+                    <button class="num">1</button>
+                    <button class="num">2</button>
+                    <button class="num">3</button>
+                    <button class="op add">+</button>
+                </div>
+                <div class="row">
+                    <button class="num">.</button>
+                    <button class="num">0</button>
+                    <button class="equals">=</button>
+                    <button class="op subtract">-</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementsByClassName('display')[0],
+            numberKeys = document.getElementsByClassName('num'),
+            addKey = document.getElementsByClassName('add')[0],
+            subtractKey = document.getElementsByClassName('subtract')[0],
+            divideKey = document.getElementsByClassName('divide')[0],
+            multiplyKey = document.getElementsByClassName('multiply')[0],
+            clearKey = document.getElementsByClassName('clear')[0],
+            evalKey = document.getElementsByClassName('equals')[0];
+          
+        let curNumber = 0,
+            prevNumber = 0,
+            afterOperation = false,
+            curOperation = undefined;
+          
+        // add listeners to number numberKeys
+        for (let i = 0; i < numberKeys.length; i++) {
+            numberKeys[i].onclick = () => {
+                changeDisplayVal(numberKeys[i].innerHTML);
+            };
+        }
+          
+        clearKey.onclick = () => {
+            clearAll();
+        };
+          
+        addKey.onclick = () => {
+            doOperation('add');
+        }
+          
+        subtractKey.onclick = () => {
+            doOperation('subtract');
+        };
+          
+        multiplyKey.onclick = () => {
+            doOperation('multiply');
+        };
+          
+        divideKey.onclick = () => {
+            doOperation('divide');
+        }
+          
+        evalKey.onclick = () => {
+            evaluate(curOperation);
+        }
+          
+        function doOperation(operation) {
+            if (!curOperation) {
+                prevNumber = curNumber;
+                curOperation = operation;
+                afterOperation = true;
+            } else if (!afterOperation) {
+                evaluate(curOperation);
+                prevNumber = curNumber
+                curOperation = operation;
+                afterOperation = true;
+            } else {
+                curOperation = operation;
+            }
+        };
+          
+        function clearAll() {
+            curNumber = 0;
+            prevNumber = 0;
+            curOperation = undefined;
+            afterOperation = false;
+            display.innerHTML = '0';
+        };
+          
+        function changeDisplayVal(numString) {
+            if (display.innerHTML === '0' || afterOperation) {
+                display.innerHTML = '';
+                afterOperation = false;
+            }
+            // fix having more than one decimal point
+            if (numString === '.' && display.innerHTML.indexOf('.') > -1) {
+                numString = '';
+            }
+            if (display.innerHTML.length >= 16) {
+                // do nothing (16 digit limit)
+            } else {
+                display.innerHTML += numString;
+            };
+            // set current number
+            curNumber = Number(display.innerHTML);
+        };
+          
+        function evaluate(operation) {
+            if (!afterOperation) {
+                switch (operation) {
+                    case 'add':
+                        curNumber = prevNumber + curNumber;
+                        break;
+                    case 'subtract':
+                        curNumber = prevNumber - curNumber;
+                        break;
+                    case 'multiply':
+                        curNumber = prevNumber * curNumber;
+                        break;
+                    case 'divide':
+                        curNumber = prevNumber / curNumber;
+                        break;
+                }
+                if (curNumber.toString().length >= 16) {
+                    curNumber = Number(curNumber.toFixed(16));
+                }
+                display.innerHTML = curNumber;
+            }
+            afterOperation = true;
+            curOperation = undefined;
+        };
+    </script>
+</body>
+</html>

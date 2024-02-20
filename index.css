@@ -1,0 +1,153 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url(./asset/bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+h1{
+  position: absolute;
+  top: 20%;
+  left: 38.4%;
+  color: white;
+}
+h2{
+  position: absolute;
+  top: 26%;
+  left: 45%;
+  color: white;
+}
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* This centers the container */
+  display: grid;
+  background-color: rgba(0, 0, 0, 0.381);
+  filter: blur(1px);
+  -webkit-filter: blur(0px);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.grid {
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  width: 1in;
+  height: 1in;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  fill: #fff; /* change color as per your need */
+}
+
+ul {
+  display: flex;
+  position: absolute;
+  top: 74%;
+  left: 48.9%;
+  transform: translate(-50%, -50%);
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li a {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 80px;
+  font-size: 35px;
+  margin: 0 10px;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff;
+  z-index: 1;
+}
+
+ul li a .icon {
+  position: relative;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
+}
+
+ul li a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}
+
+ul li a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  transition: .5s;
+  z-index: 2;
+}
+
+ul li a:hover:before {
+  top: 0;
+}
+
+ul li:nth-child(1) a:before{
+  background: #3b5999;
+}
+
+ul li:nth-child(2) a:before{
+  background: #55acee;
+}
+
+ul li:nth-child(3) a:before {
+  background: #0077b5;
+}
+
+ul li:nth-child(4) a:before {
+  background: #dd4b39;
+}
+@media screen and (max-width: 700px) {
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-size: auto;
+  }
+  h1{
+    position: absolute;
+    font-size: 25px;
+    top: 20%;
+    left: 15%;
+    color: #fff;
+  }
+  h2{
+    position: absolute;
+    top: 26%;
+    left: 30%;
+    color: #fff;
+  }
+  ul {
+    display: flex;
+    position: absolute;
+    top: 74%;
+    left: 44.7%;
+    transform: translate(-50%, -50%);
+  }
+}
